@@ -23,5 +23,5 @@ YÖNTEM:
 - Sonunda “Kaynak ve doğrulama notu” ekle. Gerçekten dayandığın kaynakları ve henüz kontrol edilmesi gereken kaynakları ayrı listele.
 - Harici akademik veri tabanına erişimin yoksa bunu belirt; akademik görüş ayrılıklarını ve veri/rivayet/yorum/çıkarım ayrımını göster.`;
 try{const client=new OpenAI({apiKey:process.env.OPENAI_API_KEY});const out=await client.responses.create({model:MODEL,instructions,input:"Şu ayeti 14 başlıklı çerçeveyle çözümle: "+verse,max_output_tokens:9000});res.json({answer:out.output_text||"Yanıt üretilemedi.",model:MODEL});}catch(e){console.error("OpenAI error",e?.message||e);res.status(502).json({error:"Analiz tamamlanamadı. API anahtarını, model erişimini ve kullanım limitini kontrol edin."});}});
-app.get("*",(_q,r)=>r.sendFile(path.join(__dirname,"public","index.html")));
+
 app.listen(PORT,()=>console.log("Kur’an Akademi listening on "+PORT+" model="+MODEL));
